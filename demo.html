@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>jeoquery examples</title>
+	<link rel="stylesheet" href="http://twitter.github.com/bootstrap/assets/css/bootstrap.css"/>
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<script type="text/javascript" src="jeoquery.js"></script>
+</head>
+<body class="container">
+	<script type="text/javascript">
+	function dbg(data) {
+			$("#debug").html(JSON.stringify(data));
+	}
+	$(function() {
+		jeoquery.userName = 'tompi';
+	});
+</script>
+    <div class="row">
+        <div class="well">
+            <h2>Norwegian postal codes</h2>
+        </div>
+    </div>
+    <div class="row">
+			<a class="btn" href="#" 
+			 onclick="jeoquery.countryInfo('', 'NO', dbg);return false;">
+			 countryInfo
+			</a>
+		</div>
+    <div class="row">
+        <div class="well">
+					<pre id="debug"></pre>
+        </div>
+    </div>
+
+</body>
+
+</html>
