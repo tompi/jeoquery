@@ -17,13 +17,33 @@
 </script>
     <div class="row">
         <div class="well">
-            <h2>Norwegian postal codes</h2>
+            <h2>jeoQuery demo</h2>
         </div>
     </div>
     <div class="row">
 			<a class="btn" href="#" 
-			 onclick="jeoquery.countryInfo('', 'NO', dbg);return false;">
+			 onclick="jeoquery.astergdem('50.01', '10.2', dbg);return false;">
+			 astergdem
+			</a>
+			<a class="btn" href="#" 
+			 onclick="jeoquery.children(3175395, , dbg);return false;">
+			 children
+			</a>
+			<a class="btn" href="#" 
+			 onclick="jeoquery.cities('44.1','-9.9','-22.4','55.2','', dbg);return false;">
+			 cities
+			</a>
+			<a class="btn" href="#" 
+			 onclick="jeoquery.countryCode('47.03','10.2','','','', dbg);return false;">
+			 countryCode
+			</a>
+			<a class="btn" href="#" 
+			 onclick="jeoquery.countryInfo('GB', 'NO', dbg);return false;">
 			 countryInfo
+			</a>
+			<a class="btn" href="#" 
+			 onclick="jeoquery.countrySubdivision('47.03','10.2','1','','', dbg);return false;">
+			 countrySubdivision
 			</a>
 		</div>
     <div class="row">
