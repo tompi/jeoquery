@@ -27,6 +27,13 @@ var jeoquery = (function () {
 			  nonNullData, 
 				callBack);
 	}
+	function formatDate(date) {
+		var dateQs = '';
+		if (date) {
+			dateQs = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
+		}
+		return dateQs;
+	}
 
 	my.astergdem = function( callBack, latitude, longitude ) {
 			getGeoNames("astergdemJSON", {
@@ -38,7 +45,7 @@ var jeoquery = (function () {
 	my.children = function( callBack, geoNameId, maxRows ) {
 			getGeoNames("childrenJSON", {
 				"geonameId": geoNameId,
-				"maxRows": maxRows || 200 },
+				"maxRows": maxRows },
 				callBack);
 	};
 
@@ -81,16 +88,12 @@ var jeoquery = (function () {
 	};
 
 	my.earthquakes = function( callBack, north, south, east, west, date, maxRows, minMagnitude ) {
-		var dateQs = '';
-		if (date) {
-			dateQs = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
-		}
 			getGeoNames("earthquakesJSON", {
 				"north": north,
 				"south": south,
 				"east": east,
 				"west": west,
-				"date": dateQs,
+				"date": formatDate(date),
 				"maxRows": maxRows,
 				"minMagnitude": minMagnitude },
 				callBack);
@@ -141,9 +144,10 @@ var jeoquery = (function () {
 				"lng": longitude },
 				callBack);
 	};
-	my.findNearbyWeather = function( callBack, ICAO_AirportCode ) {
-			getGeoNames("weatherIcaoJSON", {
-				"ICAO": ICAO_AirportCode },
+	my.findNearbyWeather = function( callBack, latitude, longitude ) {
+			getGeoNames("findNearbyWeatherJSON", {
+				"lat": latitude,
+				"lng": longitude },
 				callBack);
 	};
 	my.findNearbyWikipedia = function( callBack, latitude, longitude, languageCode, radius, maxRows, country, postalCode ) {
@@ -190,14 +194,118 @@ var jeoquery = (function () {
 				"style": style},
 				callBack);
 	};
-
-	
-
-
-  my.postalCodeLookup = function( callBack, postalCode, countryCode ) {  		
+	my.gtopo30 = function( callBack, latitude, longitude ) {
+			getGeoNames("gtopo30JSON", {
+				"lat": latitude,
+				"lng": longitude},
+				callBack);
+	};
+	my.hierarchy = function( callBack, geonameId ) {
+			getGeoNames("hierarchyJSON", {
+				"geonameId": geonameId},
+				callBack);
+	};
+	my.neighbourhood = function( callBack, latitude, longitude ) {
+			getGeoNames("neighbourhoodJSON", {
+				"lat": latitude,
+				"lng": longitude},
+				callBack);
+	};
+	my.neighbours = function( callBack, geonameId, countryCode ) {
+			getGeoNames("neighboursJSON", {
+				"geonameId": geonameId,
+				"country": countryCode},
+				callBack);
+	};
+	my.ocean = function( callBack, latitude, longitude, radius ) {
+			getGeoNames("oceanJSON", {
+				"lat": latitude,
+				"lng": longitude,
+				"radius": radius},
+				callBack);
+	};
+	my.postalCodeCountryInfo = function( callBack ) {
+			getGeoNames("postalCodeCountryInfoJSON", {}, callBack);
+	};
+  my.postalCodeLookup = function( callBack, postalCode, countryCode, maxRows, charset ) {  		
 			getGeoNames("postalCodeLookupJSON", {
 				"postalcode": postalCode,
-				"country": countryCode || my.defaultCountryCode },
+				"country": countryCode,
+				"maxRows": maxRows,
+				"charset": charset },
+				callBack);
+	};
+  my.postalCodeSearch = function( callBack, postalCode, postalcode_startsWith, placename_startsWith, countryCode, countryBias, maxRows, style, operator, charset, isReduced ) {  		
+			getGeoNames("postalCodeSearchJSON", {
+				"postalcode": postalCode,
+				"postalcode_startsWith": postalcode_startsWith,
+				"placename_startsWith": placename_startsWith,
+				"country": countryCode,
+				"countryBias": countryBias,
+				"maxRows": maxRows,
+				"style": style,
+				"operator": operator,
+				"charset": charset,
+				"isReduced": isReduced },
+				callBack);
+	};
+  my.search = function( callBack, q, name, name_equals, name_startsWith, maxRows, startRow, country, countryBias, continentCode, adminCode1, adminCode2, adminCode3, featureClass, featureCode, lang, type, style, isNameRequired, tag, operator, charset, fuzzy ) {  		
+			getGeoNames("searchJSON", {
+				"q": q,
+				"name": name,
+				"name_equals": name_equals,
+				"name_startsWith": name_startsWith,
+				"maxRows": maxRows,
+				"startRow": startRow,
+				"country": country,
+				"countryBias": countryBias,
+				"continentCode": continentCode,
+				"adminCode1": adminCode1,
+				"adminCode2": adminCode2,
+				"adminCode3": adminCode3,
+				"featureClass": featureClass,
+				"featureCode": featureCode,
+				"lang": lang,
+				"type": type,
+				"style": style,
+				"isNameRequired": isNameRequired,
+				"tag": tag,
+				"operator": operator,
+				"charset": charset,
+				"fuzzy": fuzzy },
+				callBack);
+	};
+	my.siblings = function( callBack, geonameId ) {
+			getGeoNames("siblingsJSON", {
+				"geonameId": geonameId},
+				callBack);
+	};
+	my.srtm3 = function( callBack, latitude, longitude ) {
+			getGeoNames("srtm3JSON", {
+				"lat": latitude,
+				"lng": longitude},
+				callBack);
+	};
+	my.timezone = function( callBack, latitude, longitude, radius, date ) {
+			getGeoNames("timezoneJSON", {
+				"lat": latitude,
+				"lng": longitude,
+				"radius": radius,
+				"date": formatDate(date)},
+				callBack);
+	};
+	my.weather = function( callBack, north, south, east, west, maxRows ) {
+			getGeoNames("weatherJSON", {
+				"north": north,
+				"south": south,
+				"east": east,
+				"west": west,
+				"maxRows": maxRows },
+				callBack);
+	};
+	my.weatherIcao = function( callBack, ICAO_AirportCode ) {
+			getGeoNames("weatherIcaoJSON", {
+				"ICAO": ICAO_AirportCode },
 				callBack);
 	};
 
