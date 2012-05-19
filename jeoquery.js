@@ -1,3 +1,11 @@
+/* 
+ * jeoQuery v0.1
+ *
+ * Copyright 2012, Thomas Haukland
+ * Dual licensed under the MIT or GPL Version 2 licenses.
+ *
+ */
+
 var jeoquery = (function () {
 	var my = {};
 
@@ -149,8 +157,41 @@ var jeoquery = (function () {
 				"postalcode": postalCode },
 				callBack);
 	};
+	my.findNearestAddress = function( callBack, latitude, longitude ) {
+			getGeoNames("findNearestAddressJSON", {
+				"lat": latitude,
+				"lng": longitude },
+				callBack);
+	};
+	my.findNearestIntersection = function( callBack, latitude, longitude ) {
+			getGeoNames("findNearestIntersectionJSON", {
+				"lat": latitude,
+				"lng": longitude},
+				callBack);
+	};
+	my.findNearestIntersectionOSM = function( callBack, latitude, longitude, radius, maxRows ) {
+			getGeoNames("findNearestIntersectionJSON", {
+				"lat": latitude,
+				"lng": longitude,
+				"radius": radius,
+				"maxRows": maxRows },
+				callBack);
+	};
+	my.findNearbyPOIsOSM = function( callBack, latitude, longitude ) {
+			getGeoNames("findNearbyPOIsOSMJSON", {
+				"lat": latitude,
+				"lng": longitude},
+				callBack);
+	};
+	my.get = function( callBack, geonameId, lang, style ) {
+			getGeoNames("getJSON", {
+				"geonameId": geonameId,
+				"lang": lang,
+				"style": style},
+				callBack);
+	};
 
-
+	
 
 
   my.postalCodeLookup = function( callBack, postalCode, countryCode ) {  		
