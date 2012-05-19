@@ -2,25 +2,53 @@
 <html lang="en">
 <head>
 	<title>jeoquery examples</title>
+
 	<link rel="stylesheet" href="http://twitter.github.com/bootstrap/assets/css/bootstrap.css"/>
+	<link rel="stylesheet" href="http://twitter.github.com/bootstrap/assets/css/bootstrap-responsive.css"/>
+	<link rel="stylesheet" href="jeoquery.css"/>
 	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<script type="text/javascript" src="http://static.jstree.com/v.1.0pre/jquery.jstree.js"></script>
 	<script type="text/javascript" src="jeoquery.js"></script>
 </head>
 <body class="container">
 	<script type="text/javascript">
+	function mapJsTreeNode(obj) {
+		if (typeof(obj) != "object") return obj + "";
+		var a = [];
+		for (var key in obj) {
+			a.push({"data" : key + "", "children":  [ mapJsTreeNode(obj[key]) ]});
+		}
+		return a;
+	}
 	function dbg(data) {
-			$("#debug").html(JSON.stringify(data));
+			$("#debug2").html(JSON.stringify(data));
+			var treeJSON = mapJsTreeNode(data);
+			$("#debug").jstree({
+				"json_data" : { "data": treeJSON },
+				"plugins": [ "themes", "json_data", "ui" ]
+			});
 	}
 	$(function() {
 		jeoquery.userName = 'tompi';
+			$("#debug").jstree({
+				"json_data" : { "data": 
+						[ "julla", "jalla", "jmmmi", 
+							{ "data": "ja", "children": ["hmm", "huh", "uff"] } ] },
+				"plugins": [ "themes", "json_data", "ui" ]
+			});
 	});
 </script>
     <div class="row">
         <div class="well">
+						<span style="font-size: 40px; float: right; padding-top: 20px; color: #363;">GeoNames</span>
+						<img src="http://www.geonames.org/img/globe.gif" style="float: right;"/>
+						<span style="font-size: 76px; float: right; padding-top: 20px;">+</span>
+						<img src="http://jquery.org/wp-content/uploads/2010/01/JQuery_logo_color_onwhite-300x74.png" style="float: right;"/>
             <h2>jeoQuery <small>by Thomas Haukland</small></h2>
+						<h3>Geonames methods</h3>
         </div>
     </div>
-    <div class="row">
+    <div class="row" id="directCalls">
 			<a class="btn" href="#" 
 			 onclick="jeoquery.astergdem(dbg, '50.01', '10.2');return false;">
 			 astergdem
@@ -69,8 +97,8 @@
 			 onclick="jeoquery.findNearbyStreetsOSM(dbg, '37.451','-122.18');return false;">
 			 findNearbyStreetsOSM
 			</a>
-			<a class="btn" href="#" 
-			 onclick="jeoquery.findNearbyWeather(dbg, '43', '-2');return false;">
+			<a class="btn disabled" href="#" 
+			 onclick="return false;jeoquery.findNearbyWeather(dbg, '43', '-2');return false;">
 			 findNearbyWeather
 			</a>
 			<a class="btn" href="#" 
@@ -146,20 +174,30 @@
 			 timezone
 			</a>
 			<a class="btn" href="#" 
-			 onclick="jeoquery.weather(dbg, '44.1','-9.9','-22.4','55.2','', dbg);return false;">
+			 onclick="jeoquery.weather(dbg, '44.1','-9.9','-22.4','55.2');return false;">
 			 weather
 			</a>
 			<a class="btn" href="#" 
 			 onclick="jeoquery.weatherIcao(dbg, 'LSZH');return false;">
 			 weatherIcao
 			</a>
+			<a class="btn" href="#" 
+			 onclick="jeoquery.wikipediaBoundingBox(dbg, '44.1','-9.9','-22.4','55.2');return false;">
+			 wikipediaBoundingBox
+			</a>
+			<a class="btn" href="#" 
+			 onclick="jeoquery.wikipediaSearch(dbg, 'ibsen');return false;">
+			 wikipediaSearch
+			</a>
 		</div>
     <div class="row">
-        <div class="well">
-					<pre id="debug"></pre>
+        <div>
+					<h3>Result as a tree:</h3>
+					<div id="debug" class="well"></div>
+					<h3>Raw result:</h3>
+					<div id="debug2" class="well"></div>
         </div>
     </div>
-
 </body>
 
 </html>

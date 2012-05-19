@@ -144,12 +144,14 @@ var jeoquery = (function () {
 				"lng": longitude },
 				callBack);
 	};
+	/* TODO: this method doesnt seem to support jsonp even docs says it should...
 	my.findNearbyWeather = function( callBack, latitude, longitude ) {
 			getGeoNames("findNearbyWeatherJSON", {
 				"lat": latitude,
 				"lng": longitude },
 				callBack);
 	};
+	*/
 	my.findNearbyWikipedia = function( callBack, latitude, longitude, languageCode, radius, maxRows, country, postalCode ) {
 			getGeoNames("findNearbyWikipediaJSON", {
 				"lat": latitude,
@@ -308,6 +310,32 @@ var jeoquery = (function () {
 				"ICAO": ICAO_AirportCode },
 				callBack);
 	};
+	my.wikipediaBoundingBox = function( callBack, north, south, east, west, languageCode, maxRows ) {
+			getGeoNames("wikipediaBoundingBoxJSON", {
+				"north": north,
+				"south": south,
+				"east": east,
+				"west": west,
+				"lang": languageCode,
+				"maxRows": maxRows },
+				callBack);
+	};
+	my.wikipediaSearch = function( callBack, q, title, lang, maxRows ) {
+			getGeoNames("wikipediaSearchJSON", {
+				"q": q,
+				"title": title,
+				"lang": lang,
+				"maxRows": maxRows },
+				callBack);
+	};
 
 	return my;
 }());
+
+(function ( $ ) {
+	$.fn.jeoquery = function () {
+		var my = {};
+
+		return my;	
+	};
+})( jQuery );
