@@ -333,9 +333,44 @@ var jeoquery = (function () {
 }());
 
 (function ( $ ) {
-	$.fn.jeoquery = function () {
-		var my = {};
-
-		return my;	
+	$.fn.jeoCountrySelect = function(options) {
+		var el = this;
+		jeoquery.countryInfo(function(data) {
+				$(data.geonames).each(function() {
+					el.append($("<option></option>")
+						.attr("value", this.countryCode).
+						text(this.countryName));
+				});
+				if (options && options.callback) options.callback();
+			}, '', options ? options.language : null);
 	};
+
+	$.fn.jeoPostalCodeLookup = function(options) {
+		this.bind("change", function() {
+			var code = $(this).val();
+			var country = "EN";
+			if (options) {
+				if (options.countryInput) {
+					country = options.countryInput.val();
+				} else if (options.country) {
+					country = options.country;
+				}
+			}
+			if (code) {			
+				jeoquery.postalCodeLookup(function(data) {
+					if (data && data.postalcodes && data.postalcodes.length>0) {
+						if (options) {
+							if (options.target) {
+								options.target.val(data.postalcodes[0].placeName);
+							}
+							if (options.callback) {
+								options.callback(data.postalcodes[0]);
+							}
+						}
+					}
+				}, code, country);
+			}
+		});
+	};
+
 })( jQuery );
