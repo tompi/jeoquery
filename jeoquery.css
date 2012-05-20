@@ -1,3 +1,16 @@
 div#directCalls a {
 	margin-top: 5px;
 }
+
+#debug li[rel='leaf'] > a > ins { 
+	background-image: url('http://cdn.dustball.com/paste_plain.png');
+	background-position: 0px 0px;
+}
+#debug li[rel='application_view_list'] > a > ins { 
+	background-image: url('http://cdn.dustball.com/application_view_list.png');
+	background-position: 0px 0px;
+}
+#debug li[rel='world'] > a > ins { 
+	background-image: url('http://cdn.dustball.com/world.png');
+	background-position: 0px 0px;
+}

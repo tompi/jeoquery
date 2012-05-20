@@ -13,16 +13,36 @@
 <body class="container">
 	<script type="text/javascript">
 	function mapJsTreeNode(obj) {
-		if (typeof(obj) != "object") return obj + "";
 		var a = [];
 		for (var key in obj) {
-			a.push({"data" : key + "", "children":  [ mapJsTreeNode(obj[key]) ]});
+			var node = { "data": key + "" };
+			var nodeContent = obj[key];
+			var type = typeof(nodeContent);
+			if (type != "object") {
+				if (type == "string" ) {
+					node["data"] += " = \"" + nodeContent + "\"";
+				} else {
+					node["data"] += " = " + nodeContent;
+				}
+				if (key == "geonameId") {
+					node["attr"] = { "rel": "world" };
+				} else {
+					node["attr"] = { "rel": "leaf" };
+				}
+			} else {
+				if (Object.prototype.toString.call(nodeContent) === '[object Array]') {
+					node["attr"] = { "rel": "application_view_list" };
+				} 
+				node["children"] = [ mapJsTreeNode(obj[key]) ];
+			}
+			a.push(node);
 		}
 		return a;
 	}
 	function dbg(data) {
 			$("#debug2").html(JSON.stringify(data));
 			var treeJSON = mapJsTreeNode(data);
+
 			$("#debug").jstree({
 				"json_data" : { "data": treeJSON },
 				"plugins": [ "themes", "json_data", "ui" ]
@@ -92,7 +112,7 @@
 			 findNearbyStreetsOSM
 			</a>
 			<a class="btn disabled" href="#" 
-			 onclick="return false;jeoquery.findNearbyWeather(dbg, '43', '-2');return false;">
+			 onclick="jeoquery.findNearbyWeather(dbg, '43', '-2');return false;">
 			 findNearbyWeather
 			</a>
 			<a class="btn" href="#" 

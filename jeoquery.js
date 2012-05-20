@@ -144,14 +144,14 @@ var jeoquery = (function () {
 				"lng": longitude },
 				callBack);
 	};
-	/* TODO: this method doesnt seem to support jsonp even docs says it should...
+	/* TODO: this method doesnt seem to support jsonp even docs says it should...*/
 	my.findNearbyWeather = function( callBack, latitude, longitude ) {
 			getGeoNames("findNearbyWeatherJSON", {
 				"lat": latitude,
 				"lng": longitude },
 				callBack);
 	};
-	*/
+	/* */
 	my.findNearbyWikipedia = function( callBack, latitude, longitude, languageCode, radius, maxRows, country, postalCode ) {
 			getGeoNames("findNearbyWikipediaJSON", {
 				"lat": latitude,
