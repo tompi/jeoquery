@@ -1,216 +1,47 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-	<title>jeoquery examples</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>jeoquery</title>
 
 	<link rel="stylesheet" href="http://twitter.github.com/bootstrap/assets/css/bootstrap.css"/>
 	<link rel="stylesheet" href="http://twitter.github.com/bootstrap/assets/css/bootstrap-responsive.css"/>
 	<link rel="stylesheet" href="jeoquery.css"/>
 	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-	<script type="text/javascript" src="http://static.jstree.com/v.1.0pre/jquery.jstree.js"></script>
-	<script type="text/javascript" src="jeoquery.js"></script>
 </head>
 <body class="container">
-	<script type="text/javascript">
-	function mapJsTreeNode(obj) {
-		var a = [];
-		for (var key in obj) {
-			var node = { "data": key + "" };
-			var nodeContent = obj[key];
-			var type = typeof(nodeContent);
-			if (type != "object") {
-				if (type == "string" ) {
-					node["data"] += " = \"" + nodeContent + "\"";
-				} else {
-					node["data"] += " = " + nodeContent;
-				}
-				if (key == "geonameId") {
-					node["attr"] = { "rel": "world" };
-				} else {
-					node["attr"] = { "rel": "leaf" };
-				}
-			} else {
-				if (Object.prototype.toString.call(nodeContent) === '[object Array]') {
-					node["attr"] = { "rel": "application_view_list" };
-				} 
-				node["children"] = [ mapJsTreeNode(obj[key]) ];
-			}
-			a.push(node);
-		}
-		return a;
-	}
-	function dbg(data) {
-			$("#debug2").html(JSON.stringify(data));
-			var treeJSON = mapJsTreeNode(data);
-
-			$("#debug").jstree({
-				"json_data" : { "data": treeJSON },
-				"plugins": [ "themes", "json_data", "ui" ]
-			});
-	}
-	$(function() {
-		jeoquery.userName = 'tompi';
-	});
-</script>
     <div class="row">
         <div class="well">
-						<span style="font-size: 40px; float: right; padding-top: 20px; color: #363;">GeoNames</span>
-						<img src="http://www.geonames.org/img/globe.gif" style="float: right;"/>
-						<span style="font-size: 76px; float: right; padding-top: 20px;">+</span>
-						<img src="http://jquery.org/wp-content/uploads/2010/01/JQuery_logo_color_onwhite-300x74.png" style="float: right;"/>
+            <span style="font-size: 40px; float: right; padding-top: 20px; color: #363;">GeoNames</span>
+            <img src="http://www.geonames.org/img/globe.gif" style="float: right;"/>
+            <span style="font-size: 76px; float: right; padding-top: 20px;">+</span>
+            <img src="http://jquery.org/wp-content/uploads/2010/01/JQuery_logo_color_onwhite-300x74.png" style="float: right;"/>
             <h2>jeoQuery <small>by Thomas Haukland</small></h2>
-						<h3>Geonames methods</h3>
         </div>
     </div>
-    <div class="row" id="directCalls">
-			<a class="btn" href="#" 
-			 onclick="jeoquery.astergdem(dbg, '50.01', '10.2');return false;">
-			 astergdem
-			</a>
-			<a class="btn" href="#" 
-			 onclick="jeoquery.children(dbg, 3175395, '', dbg);return false;">
-			 children
-			</a>
-			<a class="btn" href="#" 
-			 onclick="jeoquery.cities(dbg, '44.1','-9.9','-22.4','55.2','', dbg);return false;">
-			 cities
-			</a>
-			<a class="btn" href="#" 
-			 onclick="jeoquery.countryCode(dbg, '47.03','10.2','','','', dbg);return false;">
-			 countryCode
-			</a>
-			<a class="btn" href="#" 
-			 onclick="jeoquery.countryInfo(dbg, 'GB', 'NO');return false;">
-			 countryInfo
-			</a>
-			<a class="btn" href="#" 
-			 onclick="jeoquery.countrySubdivision(dbg, '47.03','10.2','1');return false;">
-			 countrySubdivision
-			</a>
-			<a class="btn" href="#" 
-			 onclick="jeoquery.earthquakes(dbg, '44.1','-9.9','-22.4','55.2');return false;">
-			 earthquakes
-			</a>
-			<a class="btn" href="#" 
-			 onclick="jeoquery.findNearby(dbg, '47.03','10.2');return false;">
-			 findNearby
-			</a>
-			<a class="btn" href="#" 
-			 onclick="jeoquery.findNearbyPlaceName(dbg, '47.03','10.2');return false;">
-			 findNearbyPlaceName
-			</a>
-			<a class="btn" href="#" 
-			 onclick="jeoquery.findNearbyPostalCodes(dbg, '47.03','10.2');return false;">
-			 findNearbyPostalCodes
-			</a>
-			<a class="btn" href="#" 
-			 onclick="jeoquery.findNearbyStreets(dbg, '37.451','-122.18');return false;">
-			 findNearbyStreets
-			</a>
-			<a class="btn" href="#" 
-			 onclick="jeoquery.findNearbyStreetsOSM(dbg, '37.451','-122.18');return false;">
-			 findNearbyStreetsOSM
-			</a>
-			<a class="btn disabled" href="#" 
-			 onclick="jeoquery.findNearbyWeather(dbg, '43', '-2');return false;">
-			 findNearbyWeather
-			</a>
-			<a class="btn" href="#" 
-			 onclick="jeoquery.findNearbyWikipedia(dbg, '47', '9');return false;">
-			 findNearbyWikipedia
-			</a>
-			<a class="btn" href="#" 
-			 onclick="jeoquery.findNearestAddress(dbg, '37.451', '-122.18');return false;">
-			 findNearestAddress
-			</a>
-			<a class="btn" href="#" 
-			 onclick="jeoquery.findNearestIntersection(dbg, '37.451', '-122.18');return false;">
-			 findNearestIntersection
-			</a>
-			<a class="btn" href="#" 
-			 onclick="jeoquery.findNearestIntersectionOSM(dbg, '37.451', '-122.18');return false;">
-			 findNearestIntersectionOSM
-			</a>
-			<a class="btn" href="#" 
-			 onclick="jeoquery.findNearbyPOIsOSM(dbg, '37.451', '-122.18');return false;">
-			 findNearbyPOIsOSM
-			</a>
-			<a class="btn" href="#" 
-			 onclick="jeoquery.get(dbg, 3175395);return false;">
-			 get
-			</a>
-			<a class="btn" href="#" 
-			 onclick="jeoquery.gtopo30(dbg, '37.451', '-122.18');return false;">
-			 gtopo30
-			</a>
-			<a class="btn" href="#" 
-			 onclick="jeoquery.hierarchy(dbg, 3175395);return false;">
-			 hierarchy
-			</a>
-			<a class="btn" href="#" 
-			 onclick="jeoquery.neighbourhood(dbg, '40.78343', '-73.96625');return false;">
-			 neighbourhood
-			</a>
-			<a class="btn" href="#" 
-			 onclick="jeoquery.neighbours(dbg, 2658434);return false;">
-			 neighbours
-			</a>
-			<a class="btn" href="#" 
-			 onclick="jeoquery.ocean(dbg, '40.78343', '-43.96625');return false;">
-			 ocean
-			</a>
-			<a class="btn" href="#" 
-			 onclick="jeoquery.postalCodeCountryInfo(dbg);return false;">
-			 postalCodeCountryInfo
-			</a>
-			<a class="btn" href="#" 
-			 onclick="jeoquery.postalCodeLookup(dbg, 4624, 'NO');return false;">
-			 postalCodeLookup
-			</a>
-			<a class="btn" href="#" 
-			 onclick="jeoquery.postalCodeSearch(dbg, 9011, '', '', '', '', 10, '', '', '', '');return false;">
-			 postalCodeSearch
-			</a>
-			<a class="btn" href="#" 
-			 onclick="jeoquery.search(dbg, 'london');return false;">
-			 search
-			</a>
-			<a class="btn" href="#" 
-			 onclick="jeoquery.siblings(dbg, 3017382);return false;">
-			 siblings
-			</a>
-			<a class="btn" href="#" 
-			 onclick="jeoquery.srtm3(dbg, '50.01', '10.2');return false;">
-			 srtm3
-			</a>
-			<a class="btn" href="#" 
-			 onclick="jeoquery.timezone(dbg, '47.01', '10.2');return false;">
-			 timezone
-			</a>
-			<a class="btn" href="#" 
-			 onclick="jeoquery.weather(dbg, '44.1','-9.9','-22.4','55.2');return false;">
-			 weather
-			</a>
-			<a class="btn" href="#" 
-			 onclick="jeoquery.weatherIcao(dbg, 'LSZH');return false;">
-			 weatherIcao
-			</a>
-			<a class="btn" href="#" 
-			 onclick="jeoquery.wikipediaBoundingBox(dbg, '44.1','-9.9','-22.4','55.2');return false;">
-			 wikipediaBoundingBox
-			</a>
-			<a class="btn" href="#" 
-			 onclick="jeoquery.wikipediaSearch(dbg, 'ibsen');return false;">
-			 wikipediaSearch
-			</a>
-		</div>
-    <div class="row">
-        <div>
-					<h3>Result as a tree:</h3>
-					<div id="debug" class="well"></div>
-					<h3>Raw result:</h3>
-					<div id="debug2" class="well"></div>
-        </div>
+
+    <div class="section frontpage">
+			<p>
+				jeoQuery is a small jquery wrapper for the JSON methods offered by
+				<a href="http://www.geonames.org">geonames</a>. It is written and
+				maintained as a hobby project by 
+				<a href="mailto:thomas.haukland@gmail.com">Thomas Haukland</a>.
+			</p>
+			<p>
+				<a href="methods.html" class="btn btn-primary btn-large" style="float: right;">Methods demo</a>
+				The "jeoquery" namespace contains one function per geonames 
+				service, allowing you to call them easily(ok it isn't that hard
+				without this wrapper, but this gives you autocomplete on params,
+				and this really nice demo page where
+				I've used jstree to visualize the resulting json.
+			</p>
+			<p>
+				<a href="ui.html" class="btn btn-primary btn-large" style="float: right;">UI demo</a>
+				In addition, the jeoquery.js file gives you some ready ui-plugins.
+				Check out the ui-demo for a demonstration
+				of the country picker and the postal code lookup. More to come
+				soon...
+			</p>
     </div>
 </body>
 

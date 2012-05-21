@@ -1,6 +1,7 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
+	 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<title>jeoquery examples</title>
 
 	<link rel="stylesheet" href="http://twitter.github.com/bootstrap/assets/css/bootstrap.css"/>
@@ -33,11 +34,24 @@
 						<h3>UI plugins</h3>
         </div>
     </div>
+		<div class="row">
+			<p>
+				Go on, select a country first... Try viewing the source, the
+				select is populated on load by a geonames call.
+			</p>
+		</div>
     <div class="row well forms-horizontal" id="countrySelect">
 			<label for="country">Country:
 				<select id="country" disabled="disabled"><option value=""></option></select>
 			</label>
     </div>
+		<div class="row">
+			<p>
+				Next, try to input a postal code for this country,
+				and the place should be populated by a geonames service
+				as you leave the input(tab or mouse click elsewhere).
+			</p>
+		</div>
     <div class="row well forms-horizontal" id="countrySelect">
 			<label for="postalCode">Postal code:
 				<input class="input-small" id="postalCode"/>

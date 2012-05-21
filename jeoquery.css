@@ -14,3 +14,9 @@ div#directCalls a {
 	background-image: url('http://cdn.dustball.com/world.png');
 	background-position: 0px 0px;
 }
+
+div.frontpage p {
+	font-size: 1.5em;
+	line-height: 1.2em;
+	padding-bottom: 1em;
+}
