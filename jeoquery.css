@@ -1,3 +1,19 @@
+div.btn-container div.span4 {
+	text-align: center;
+	padding: 20px;
+	border: 3px solid lightgray;
+	border-radius: 10px;
+	background-color: #cbca97;
+	box-shadow: 10px 10px 5px #888;
+}
+div.btn-container div.span4 a {
+	font-size: 26px;
+	font-style: bold;
+}
+div.btn-container div.span4:hover {
+/*	background-color: #a8cfab; */
+}
+
 div#directCalls a {
 	margin-top: 5px;
 }
