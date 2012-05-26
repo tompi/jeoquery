@@ -5,6 +5,16 @@ jQuery wrapper for easily calling geonames.org jsonp services,
 and a few ui-controls for populating html selects and inputs
 with geonames data.
 
+Why use it?
+-----------
+
+There are heaps of server sides libs that wraps geonames services.
+Many web-projects use these libs and make their web pages do a
+request against their own server which in turn does another request
+against the geonames services. This is really not necessary, use the
+geonames service directly from the users browser, and avoid superflous
+latency!
+
 How to use
 ----------
 
