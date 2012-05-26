@@ -22,10 +22,15 @@ var jeoquery = (function () {
 			}
 		}
 		nonNullData["username"] = my.userName;
-		$.getJSON(
-				my.geoNamesApi + method, 
-			  nonNullData, 
-				callBack);
+		$.ajax({
+				url: my.geoNamesApi + method, 
+				dataType: 'jsonp',
+				data: nonNullData, 
+				success: callBack,
+				error: function(xhr, textStatus) {
+					alert('Ooops, server returned: ' + textStatus);
+				}
+			});
 	}
 	function formatDate(date) {
 		var dateQs = '';
@@ -145,8 +150,8 @@ var jeoquery = (function () {
 				callBack);
 	};
 	/* TODO: this method doesnt seem to support jsonp even docs says it should...*/
-	my.findNearbyWeather = function( callBack, latitude, longitude ) {
-			getGeoNames("findNearbyWeatherJSON", {
+	my.findNearByWeather = function( callBack, latitude, longitude ) {
+			getGeoNames("findNearByWeatherJSON", {
 				"lat": latitude,
 				"lng": longitude },
 				callBack);
