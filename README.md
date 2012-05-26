@@ -20,7 +20,7 @@ How to use
 
 You need to:
 
-* Download and include jeoqyer.js
+* Download and include jeoquery.js
 * Get an account at geonames: http://www.geonames.org/login (it's free)
 * Set this account before using any methods: jeoquery.userName = 'geonames-user';
 
