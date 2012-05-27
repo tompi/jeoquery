@@ -9,7 +9,8 @@
 	<link rel="stylesheet" href="jeoquery.css"/>
 	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 	<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.0.3/bootstrap.min.js"></script>
-	<script type="text/javascript" src="http://static.jstree.com/v.1.0pre/jquery.jstree.js"></script>
+<!--	<script type="text/javascript" src="http://static.jstree.com/v.1.0pre/jquery.jstree.js"></script> -->
+	<script type="text/javascript" src="jstree/jquery.jstree.js"></script>
 	<script type="text/javascript" src="jeoquery.js"></script>
 </head>
 <body class="container">
@@ -70,7 +71,12 @@
     </div>
     <div class="row">
         <div>
-					<h3>Drill down:</h3>
+					<h3>Drill down and hover the nodes</h3>
+					<p>
+						This demo attaches an event on the jstree open node, and calls
+						the "children" jsonp service at geonames to get the children,
+						and then adds it into the tree.
+					</p>
 					<div id="debug" class="well"></div>
         </div>
     </div>
