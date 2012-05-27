@@ -12,48 +12,59 @@
 </head>
 <body class="container">
 	<script type="text/javascript">
-	function mapJsTreeNode(obj) {
-		var a = [];
-		for (var key in obj) {
-			var node = { "data": key + "" };
-			var nodeContent = obj[key];
-			var type = typeof(nodeContent);
-			if (type != "object") {
-				if (type == "string" ) {
-					node["data"] += " = \"" + nodeContent + "\"";
-				} else {
-					node["data"] += " = " + nodeContent;
-				}
-				if (key == "geonameId") {
-					node["attr"] = { "rel": "world", "id": nodeContent };
-					node["state"] = "closed";
-				} else {
-					node["attr"] = { "rel": "leaf" };
-				}
-			} else {
-				if (Object.prototype.toString.call(nodeContent) === '[object Array]') {
-					node["attr"] = { "rel": "application_view_list" };
-				} 
-				node["children"] = [ mapJsTreeNode(obj[key]) ];
-			}
-			a.push(node);
+	function addNode(tree, parentNode, name, id, jsonObject) {
+		var position = 'last';
+		var data = { attr: { id: id }};
+		if (name == 'geonameId') {
+			position = 'first';
+			data.attr.rel = jsonObject;
+			data.state = 'closed';
 		}
-		return a;
+		var type = typeof(jsonObject);
+		if (type != 'object') {			
+			name += ' = ';
+			if (type == 'string' ) 
+				name += '"' + jsonObject + '"';
+			else
+				name += jsonObject;
+		}
+		data.data = name;
+
+		tree.jstree('create_node', parentNode, position, data, function() {
+			if (type == 'object') {
+				var i = 0;
+				for (var key in jsonObject) {
+					var childId = id + '_' + i;
+					addNode(tree, $('#' + id), key, childId, jsonObject[key]);
+					i++;
+				}
+			}
+		});
 	}
 	function expand(event, data) {
 		alert($(this).attr("id"));
 	}
 	function dbg(data) {
-			var treeJSON = mapJsTreeNode(data);
-
-			$("#debug").jstree({
-				"json_data" : { "data": treeJSON },
-				"plugins": [ "themes", "json_data", "ui" ]
-			}).bind("open_node.jstree", expand);
+			addNode($('#debug'), $('#root'), 'Earth', "0_1", data);
 	}
 	$(function() {
 		jeoquery.userName = 'tompi';
 
+			$("#debug").jstree({
+				"plugins": [ "themes", "ui" ,"html_data" ],
+			});
+			$("#debug").bind("open_node.jstree", function(e, data) {
+				var node = data.args[0];
+				if (!node.data('openedbefore')) {
+					node.data('openedbefore', 'true');
+					var rel = node.attr('rel');
+					if (rel) {
+						jeoquery.children(function(json) {
+							addNode($('#debug'), node, 'Children', rel, json);
+						}, rel);
+					}
+				}
+			});
 		jeoquery.get(dbg, 6295630);
 	});
 </script>
@@ -69,8 +80,8 @@
     </div>
     <div class="row">
         <div>
-					<h3>Expand something:</h3>
-					<div id="debug" class="well"></div>
+					<h3>Drill down:</h3>
+					<div id="debug" class="well"><ul><li id="root"><a href="#">Geonames</a></li></ul></div>
         </div>
     </div>
 </body>

@@ -5,6 +5,7 @@ div.btn-container div.span4 {
 	border-radius: 10px;
 	background-color: #cbca97;
 	box-shadow: 10px 10px 5px #888;
+	margin-bottom: 20px;
 }
 div.btn-container div.span4 a {
 	font-size: 26px;
