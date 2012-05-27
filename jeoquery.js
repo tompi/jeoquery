@@ -14,6 +14,18 @@ var jeoquery = (function () {
 	my.defaultLanguage = 'en';
 	my.geoNamesApi = 'http://api.geonames.org/';
 
+	my.featureClass = {
+		AdministrativeBoundaryFeatures: 'A',
+		HydrographicFeatures: 'H',
+		AreaFeatures: 'L',
+		PopulatedPlaceFeatures: 'P',
+		RoadRailroadFeatures: 'R', 
+		SpotFeatures: 'S',
+		HypsographicFeatures: 'T',
+		UnderseaFeatures: 'U',
+		VegetationFeatures: 'V'
+	};
+
 	function getGeoNames(method, data, callBack) {
 		var nonNullData = {};
 		for (var key in data) {

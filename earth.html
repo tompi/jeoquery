@@ -8,65 +8,54 @@
 	<link rel="stylesheet" href="http://twitter.github.com/bootstrap/assets/css/bootstrap-responsive.css"/>
 	<link rel="stylesheet" href="jeoquery.css"/>
 	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.0.3/bootstrap.min.js"></script>
 	<script type="text/javascript" src="http://static.jstree.com/v.1.0pre/jquery.jstree.js"></script>
 	<script type="text/javascript" src="jeoquery.js"></script>
 </head>
 <body class="container">
-	<script type="text/javascript">
-	function addNode(tree, parentNode, name, id, jsonObject) {
-		var position = 'last';
-		var data = { attr: { id: id }};
-		if (name == 'geonameId') {
-			position = 'first';
-			data.attr.rel = jsonObject;
-			data.state = 'closed';
+<script type="text/javascript">
+	function getPopoverContent(g) {
+		var c = '<table class="table table-striped"><thead>';
+		c += '<tr><th>Key</th><th>Value</th></tr></thead><tbody>';
+		for (var k in g) {
+			c += '<tr><td>' + k + '</td><td>' + g[k] + '</td></tr>';
 		}
-		var type = typeof(jsonObject);
-		if (type != 'object') {			
-			name += ' = ';
-			if (type == 'string' ) 
-				name += '"' + jsonObject + '"';
-			else
-				name += jsonObject;
-		}
-		data.data = name;
-
-		tree.jstree('create_node', parentNode, position, data, function() {
-			if (type == 'object') {
-				var i = 0;
-				for (var key in jsonObject) {
-					var childId = id + '_' + i;
-					addNode(tree, $('#' + id), key, childId, jsonObject[key]);
-					i++;
-				}
-			}
-		});
-	}
-	function expand(event, data) {
-		alert($(this).attr("id"));
-	}
-	function dbg(data) {
-			addNode($('#debug'), $('#root'), 'Earth', "0_1", data);
+		return c + '</tbody></table>';
 	}
 	$(function() {
+		// Set geonames user
 		jeoquery.userName = 'tompi';
-
-			$("#debug").jstree({
-				"plugins": [ "themes", "ui" ,"html_data" ],
-			});
-			$("#debug").bind("open_node.jstree", function(e, data) {
-				var node = data.args[0];
-				if (!node.data('openedbefore')) {
-					node.data('openedbefore', 'true');
-					var rel = node.attr('rel');
-					if (rel) {
-						jeoquery.children(function(json) {
-							addNode($('#debug'), node, 'Children', rel, json);
-						}, rel);
+		// Create tree with "Earth" node
+		var earth = { data: 'Earth', state: 'closed', attr: { id: 6295630 } };
+		var tree = $("#debug").jstree({
+			"plugins": [ "themes", "ui" ,"json_data" ],
+			"json_data": {data: earth}
+		});
+		// Bind function to lookup children to open-event
+		tree.bind("open_node.jstree", function(e, data) {
+			var node = data.args[0];
+			if (!node.data('openedbefore')) {
+				node.data('openedbefore', 'true');
+				var geoId = node.attr('id');
+				// Actual geonames lookup
+				jeoquery.children(function(obj) {
+					if (obj && obj.geonames) {
+						// Loop over results(children) and add them as nodes
+						for (var i = 0; i <  obj.geonames.length; i++) {
+							var gn = obj.geonames[i];
+							var data = { data: gn.name, attr: { id: gn.geonameId }};
+							if (gn.numberOfChildren) data.state = 'closed';
+							tree.jstree('create_node', node, 'last', data, function() {
+								$('#' + gn.geonameId + ' a').popover({
+									title: gn.name,									
+									content: getPopoverContent(gn)
+								});
+							});
+						}
 					}
-				}
-			});
-		jeoquery.get(dbg, 6295630);
+				}, geoId);
+			}
+		});
 	});
 </script>
     <div class="row">
@@ -82,7 +71,7 @@
     <div class="row">
         <div>
 					<h3>Drill down:</h3>
-					<div id="debug" class="well"><ul><li id="root"><a href="#">Geonames</a></li></ul></div>
+					<div id="debug" class="well"></div>
         </div>
     </div>
 </body>
