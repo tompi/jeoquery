@@ -1,9 +1,43 @@
+.center {
+	text-align: center;
+}
+
+.map {
+	background: url('img/bg.png') no-repeat;
+}
+
+a {
+	color: #237729;
+}
+a:hover {
+	color: #3aab42;
+}
+	
+.hero-unit {
+	padding: 20px;
+	/* Fallback for web browsers that don't support RGBa */
+	background-color: #969696;
+	/* RGBa with 0.6 opacity */
+	background-color: rgba(150, 150, 150, 0.2);
+	/* For IE 5.5 - 7*/
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#33969696, endColorstr=#33969696);
+	/* For IE 8*/
+	-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#33969696, endColorstr=#33969696)"; 
+}
+
+.hero-unit h1 {
+	font-size: 5em;
+	color: #78ff9b;
+	text-shadow: 3px 3px 0 black;
+	margin-bottom: 20px;
+}
+
 div.btn-container div.span4 {
 	text-align: center;
 	padding: 20px;
 	border: 3px solid lightgray;
 	border-radius: 10px;
-	background-color: #cbca97;
+	background-color: #a6ddff;
 	box-shadow: 10px 10px 5px #888;
 	margin-bottom: 20px;
 }

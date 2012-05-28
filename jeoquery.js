@@ -33,7 +33,7 @@ var jeoquery = (function () {
 				nonNullData[key] = data[key];
 			}
 		}
-		nonNullData["username"] = my.userName;
+		nonNullData.username = my.userName;
 		$.ajax({
 				url: my.geoNamesApi + method, 
 				dataType: 'jsonp',
@@ -246,7 +246,7 @@ var jeoquery = (function () {
 	my.postalCodeCountryInfo = function( callBack ) {
 			getGeoNames("postalCodeCountryInfoJSON", {}, callBack);
 	};
-  my.postalCodeLookup = function( callBack, postalCode, countryCode, maxRows, charset ) {  		
+  my.postalCodeLookup = function( callBack, postalCode, countryCode, maxRows, charset ) {
 			getGeoNames("postalCodeLookupJSON", {
 				"postalcode": postalCode,
 				"country": countryCode,
@@ -254,7 +254,7 @@ var jeoquery = (function () {
 				"charset": charset },
 				callBack);
 	};
-  my.postalCodeSearch = function( callBack, postalCode, postalcode_startsWith, placename_startsWith, countryCode, countryBias, maxRows, style, operator, charset, isReduced ) {  		
+  my.postalCodeSearch = function( callBack, postalCode, postalcode_startsWith, placename_startsWith, countryCode, countryBias, maxRows, style, operator, charset, isReduced ) {
 			getGeoNames("postalCodeSearchJSON", {
 				"postalcode": postalCode,
 				"postalcode_startsWith": postalcode_startsWith,
@@ -268,7 +268,7 @@ var jeoquery = (function () {
 				"isReduced": isReduced },
 				callBack);
 	};
-  my.search = function( callBack, q, name, name_equals, name_startsWith, maxRows, startRow, country, countryBias, continentCode, adminCode1, adminCode2, adminCode3, featureClass, featureCode, lang, type, style, isNameRequired, tag, operator, charset, fuzzy ) {  		
+  my.search = function( callBack, q, name, name_equals, name_startsWith, maxRows, startRow, country, countryBias, continentCode, adminCode1, adminCode2, adminCode3, featureClass, featureCode, lang, type, style, isNameRequired, tag, operator, charset, fuzzy ) {
 			getGeoNames("searchJSON", {
 				"q": q,
 				"name": name,
@@ -358,7 +358,7 @@ var jeoquery = (function () {
 						.attr("value", this.countryCode).
 						text(this.countryName));
 				});
-				if (options && options.callback) options.callback();
+				if (options && options.callback) { options.callback(); }
 			}, '', options ? options.language : null);
 	};
 
