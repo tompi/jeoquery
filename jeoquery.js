@@ -28,7 +28,7 @@ var jeoquery = (function () {
 				data: nonNullData, 
 				success: callBack,
 				error: function(xhr, textStatus) {
-					alert('Ooops, server returned: ' + textStatus);
+					alert('Ooops, geonames server returned: ' + textStatus);
 				}
 			});
 	}
@@ -61,8 +61,6 @@ var jeoquery = (function () {
 				"east": east,
 				"west": west,
 				"lang": language || my.defaultLanguage },
-				// "maxRows": maxRows || 200 },
-				// TODO: find out why geonames chokes on maxRows...
 				callBack);
 	};
 
@@ -149,14 +147,12 @@ var jeoquery = (function () {
 				"lng": longitude },
 				callBack);
 	};
-	/* TODO: this method doesnt seem to support jsonp even docs says it should...*/
 	my.findNearByWeather = function( callBack, latitude, longitude ) {
 			getGeoNames("findNearByWeatherJSON", {
 				"lat": latitude,
 				"lng": longitude },
 				callBack);
 	};
-	/* */
 	my.findNearbyWikipedia = function( callBack, latitude, longitude, languageCode, radius, maxRows, country, postalCode ) {
 			getGeoNames("findNearbyWikipediaJSON", {
 				"lat": latitude,
