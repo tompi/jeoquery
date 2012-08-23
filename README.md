@@ -8,7 +8,7 @@ with geonames data.
 Why use it?
 -----------
 
-There are heaps of server sides libs that wraps geonames services.
+There are heaps of server side libs that wrap geonames services.
 Many web-projects use these libs and make their web pages do a
 request against their own server which in turn does another request
 against the geonames services. This is really not necessary, use the
