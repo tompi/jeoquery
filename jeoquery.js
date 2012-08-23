@@ -1,5 +1,5 @@
 /* 
- * jeoQuery v0.1
+ * jeoQuery v0.2
  *
  * Copyright 2012, Thomas Haukland
  * Dual licensed under the MIT or GPL Version 2 licenses.
@@ -14,6 +14,18 @@ var jeoquery = (function () {
 	my.defaultLanguage = 'en';
 	my.geoNamesApi = 'http://api.geonames.org/';
 
+	my.featureClass = {
+		AdministrativeBoundaryFeatures: 'A',
+		HydrographicFeatures: 'H',
+		AreaFeatures: 'L',
+		PopulatedPlaceFeatures: 'P',
+		RoadRailroadFeatures: 'R', 
+		SpotFeatures: 'S',
+		HypsographicFeatures: 'T',
+		UnderseaFeatures: 'U',
+		VegetationFeatures: 'V'
+	};
+
 	function getGeoNames(method, data, callBack) {
 		var nonNullData = {};
 		for (var key in data) {
@@ -21,7 +33,7 @@ var jeoquery = (function () {
 				nonNullData[key] = data[key];
 			}
 		}
-		nonNullData["username"] = my.userName;
+		nonNullData.username = my.userName;
 		$.ajax({
 				url: my.geoNamesApi + method, 
 				dataType: 'jsonp',
@@ -230,7 +242,7 @@ var jeoquery = (function () {
 	my.postalCodeCountryInfo = function( callBack ) {
 			getGeoNames("postalCodeCountryInfoJSON", {}, callBack);
 	};
-  my.postalCodeLookup = function( callBack, postalCode, countryCode, maxRows, charset ) {  		
+  my.postalCodeLookup = function( callBack, postalCode, countryCode, maxRows, charset ) {
 			getGeoNames("postalCodeLookupJSON", {
 				"postalcode": postalCode,
 				"country": countryCode,
@@ -238,7 +250,7 @@ var jeoquery = (function () {
 				"charset": charset },
 				callBack);
 	};
-  my.postalCodeSearch = function( callBack, postalCode, postalcode_startsWith, placename_startsWith, countryCode, countryBias, maxRows, style, operator, charset, isReduced ) {  		
+  my.postalCodeSearch = function( callBack, postalCode, postalcode_startsWith, placename_startsWith, countryCode, countryBias, maxRows, style, operator, charset, isReduced ) {
 			getGeoNames("postalCodeSearchJSON", {
 				"postalcode": postalCode,
 				"postalcode_startsWith": postalcode_startsWith,
@@ -252,7 +264,11 @@ var jeoquery = (function () {
 				"isReduced": isReduced },
 				callBack);
 	};
-  my.search = function( callBack, q, name, name_equals, name_startsWith, maxRows, startRow, country, countryBias, continentCode, adminCode1, adminCode2, adminCode3, featureClass, featureCode, lang, type, style, isNameRequired, tag, operator, charset, fuzzy ) {  		
+  my.searchDirect = function(options, callBack) {
+			getGeoNames("searchJSON", options, callBack);
+  };
+
+  my.search = function( callBack, q, name, name_equals, name_startsWith, maxRows, startRow, country, countryBias, continentCode, adminCode1, adminCode2, adminCode3, featureClass, featureCode, lang, type, style, isNameRequired, tag, operator, charset, fuzzy ) {
 			getGeoNames("searchJSON", {
 				"q": q,
 				"name": name,
@@ -337,26 +353,25 @@ var jeoquery = (function () {
 	$.fn.jeoCountrySelect = function(options) {
 		var el = this;
 		jeoquery.countryInfo(function(data) {
-				$(data.geonames).each(function() {
+        var sortedNames = data.geonames;
+        if (data.geonames.sort) {
+          sortedNames = data.geonames.sort(function(a,b) { 
+            return a.countryName.localeCompare(b.countryName); 
+          });
+        }
+				$(sortedNames).each(function() {
 					el.append($("<option></option>")
 						.attr("value", this.countryCode).
 						text(this.countryName));
 				});
-				if (options && options.callback) options.callback();
+				if (options && options.callback) { options.callback(); }
 			}, '', options ? options.language : null);
 	};
 
 	$.fn.jeoPostalCodeLookup = function(options) {
 		this.bind("change", function() {
 			var code = $(this).val();
-			var country = "EN";
-			if (options) {
-				if (options.countryInput) {
-					country = options.countryInput.val();
-				} else if (options.country) {
-					country = options.country;
-				}
-			}
+			var country = options.countryInput || "EN";
 			if (code) {			
 				jeoquery.postalCodeLookup(function(data) {
 					if (data && data.postalcodes && data.postalcodes.length>0) {
@@ -373,5 +388,33 @@ var jeoquery = (function () {
 			}
 		});
 	};
+
+	$.fn.jeoCityAutoComplete = function(options) {
+    this.autocomplete({
+      source: function( request, response ) {
+        jeoquery.searchDirect(
+            {
+              featureClass: "p", 
+              style: "full",
+              maxRows: 12,
+              name_startsWith: request.term
+            }, function( data ) {
+            response( $.map( data.geonames, function( item ) {
+              return {
+                label: item.name + (item.adminName1 ? ", " + item.adminName1 : "") + ", " + item.countryName,
+                value: item.name
+              }
+            }));
+        });
+      },
+      minLength: 2,
+      open: function() {
+        $( this ).removeClass( "ui-corner-all" ).addClass( "ui-corner-top" );
+      },
+      close: function() {
+        $( this ).removeClass( "ui-corner-top" ).addClass( "ui-corner-all" );
+      }
+    });
+  };
 
 })( jQuery );
