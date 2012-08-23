@@ -1,5 +1,5 @@
 /* 
- * jeoQuery v0.1
+ * jeoQuery v0.2
  *
  * Copyright 2012, Thomas Haukland
  * Dual licensed under the MIT or GPL Version 2 licenses.
@@ -264,6 +264,10 @@ var jeoquery = (function () {
 				"isReduced": isReduced },
 				callBack);
 	};
+  my.searchDirect = function(options, callBack) {
+			getGeoNames("searchJSON", options, callBack);
+  };
+
   my.search = function( callBack, q, name, name_equals, name_startsWith, maxRows, startRow, country, countryBias, continentCode, adminCode1, adminCode2, adminCode3, featureClass, featureCode, lang, type, style, isNameRequired, tag, operator, charset, fuzzy ) {
 			getGeoNames("searchJSON", {
 				"q": q,
@@ -349,7 +353,13 @@ var jeoquery = (function () {
 	$.fn.jeoCountrySelect = function(options) {
 		var el = this;
 		jeoquery.countryInfo(function(data) {
-				$(data.geonames).each(function() {
+        var sortedNames = data.geonames;
+        if (data.geonames.sort) {
+          sortedNames = data.geonames.sort(function(a,b) { 
+            return a.countryName.localeCompare(b.countryName); 
+          });
+        }
+				$(sortedNames).each(function() {
 					el.append($("<option></option>")
 						.attr("value", this.countryCode).
 						text(this.countryName));
@@ -378,5 +388,33 @@ var jeoquery = (function () {
 			}
 		});
 	};
+
+	$.fn.jeoCityAutoComplete = function(options) {
+    this.autocomplete({
+      source: function( request, response ) {
+        jeoquery.searchDirect(
+            {
+              featureClass: "p", 
+              style: "full",
+              maxRows: 12,
+              name_startsWith: request.term
+            }, function( data ) {
+            response( $.map( data.geonames, function( item ) {
+              return {
+                label: item.name + (item.adminName1 ? ", " + item.adminName1 : "") + ", " + item.countryName,
+                value: item.name
+              }
+            }));
+        });
+      },
+      minLength: 2,
+      open: function() {
+        $( this ).removeClass( "ui-corner-all" ).addClass( "ui-corner-top" );
+      },
+      close: function() {
+        $( this ).removeClass( "ui-corner-top" ).addClass( "ui-corner-all" );
+      }
+    });
+  };
 
 })( jQuery );
