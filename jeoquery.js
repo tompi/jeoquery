@@ -6,7 +6,7 @@
  *
  */
 
-var jeoquery = (function () {
+var jeoquery = (function ($) {
 	var my = {};
 
 	my.userName = 'demo';
@@ -347,7 +347,7 @@ var jeoquery = (function () {
 	};
 
 	return my;
-}());
+}(jQuery));
 
 (function ( $ ) {
 	$.fn.jeoCountrySelect = function(options) {
