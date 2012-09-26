@@ -373,7 +373,10 @@ var jeoquery = (function($) {
 		$.fn.jeoPostalCodeLookup = function(options) {
 				this.bind("change", function() {
 						var code = $(this).val();
-						var country = options.countryInput || "EN";
+						var country = "EN";
+						if (options.countryInput) {
+              country = options.countryInput.val() || "EN";
+            }
 						if (code) {
 								jeoquery.postalCodeLookup(function(data) {
 										if (data && data.postalcodes && data.postalcodes.length > 0) {
