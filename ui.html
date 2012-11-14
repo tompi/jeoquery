@@ -13,6 +13,8 @@
         <link rel="stylesheet" href="jeoquery.css" />
         <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
         <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.23/jquery-ui.min.js"></script>
+        <script type="text/javascript" src="https:////cdnjs.cloudflare.com/ajax/libs/prettify/188.0.0/prettify.js"></script>
+        
         <script type="text/javascript" src="jeoquery.js"></script>
         <script type="text/javascript" src="tracking.js"></script>
     </head>
@@ -33,6 +35,7 @@
                 });
                 
                 $("#city").jeoCityAutoComplete();
+                prettiyPrint();
             });
         </script>
         <div class="row">
@@ -41,7 +44,7 @@
                 <img src="http://www.geonames.org/img/globe.gif" style="float: right;"
                 alt="Geonames logo" />
                 <span style="font-size: 76px; float: right; padding-top: 20px;">+</span>
-                <img src="https://jquery.org/wp-content/uploads/2010/01/JQuery_logo_color_onwhite-300x74.png"
+                <img src="http://jquery.org/wp-content/uploads/2010/01/JQuery_logo_color_onwhite-300x74.png"
                 style="float: right;" alt="jQuery logo" />
                 <h2>jeoQuery
                     <small>by Thomas Haukland</small>
@@ -56,9 +59,19 @@
         <div class="row well forms-horizontal" id="countrySelect">
             <label for="country">Country:
                 <select id="country" disabled="disabled">
-                    <option value=""></option>
+                    <option value="">Choose a country</option>
                 </select>
             </label>
+            <pre class="prettyprint">
+    &lt;select id=&quot;country&quot; disabled=&quot;disabled&quot;&gt;
+       &lt;option value=&quot;&quot;&gt;Choose a country&lt;/option&gt;
+    &lt;/select&gt;</pre>
+            <pre class="prettyprint">
+    $("#country").jeoCountrySelect({
+        "callback": function () {
+            $("#country").removeAttr('disabled');
+        }
+    });</pre>
         </div>
         <div class="row">
             <p>Next, try to input a postal code for this country, and the place should
