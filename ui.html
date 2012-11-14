@@ -25,13 +25,13 @@
                 jeoquery.userName = 'tompi';
                 
                 $("#country").jeoCountrySelect({
-                    "callback": function () {
+                    callback: function () {
                         $("#country").removeAttr('disabled');
                     }
                 });
                 $("#postalCode").jeoPostalCodeLookup({
-                    "countryInput": $("#country"),
-                    "target": $("#postalPlace")
+                    countryInput: $("#country"),
+                    target: $("#postalPlace")
                 });
                 
                 $("#city").jeoCityAutoComplete();
@@ -68,7 +68,7 @@
     &lt;/select&gt;</pre>
             <pre class="prettyprint">
     $("#country").jeoCountrySelect({
-        "callback": function () {
+        callback: function () {
             $("#country").removeAttr('disabled');
         }
     });</pre>
@@ -85,11 +85,27 @@
             <label for="postalPlace">Postal place:
                 <input id="postalPlace" type="text"/>
             </label>
+            <pre class="prettyprint">
+    &lt;label for=&quot;postalCode&quot;&gt;Postal code:
+        &lt;input class=&quot;input-small&quot; id=&quot;postalCode&quot; type=&quot;text&quot; /&gt;
+    &lt;/label&gt;
+    &lt;label for=&quot;postalPlace&quot;&gt;Postal place:
+        &lt;input id=&quot;postalPlace&quot; type=&quot;text&quot;/&gt;
+    &lt;/label&gt;</pre>
+            <pre class="prettyprint">
+    $("#city").jeoCityAutoComplete();</pre>
         </div>
         <div class="row well forms-horizontal" id="cityAutocomplete">
             <label for="city">City autocomplete (nicked from jquery ui demo):
                 <input class="input-large" id="city" type="text"/>
             </label>
+            <pre class="prettyprint">
+    &lt;input class=&quot;input-large&quot; id=&quot;city&quot; type=&quot;text&quot;/&gt;</pre>
+            <pre class="prettyprint">
+    $("#postalCode").jeoPostalCodeLookup({
+        countryInput: $("#country"),
+        target: $("#postalPlace")
+    });</pre>
         </div>
     </body>
 
