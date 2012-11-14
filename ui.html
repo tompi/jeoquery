@@ -93,7 +93,10 @@
         &lt;input id=&quot;postalPlace&quot; type=&quot;text&quot;/&gt;
     &lt;/label&gt;</pre>
             <pre class="prettyprint">
-    $("#city").jeoCityAutoComplete();</pre>
+    $("#postalCode").jeoPostalCodeLookup({
+        countryInput: $("#country"),
+        target: $("#postalPlace")
+    });</pre>
         </div>
         <div class="row well forms-horizontal" id="cityAutocomplete">
             <label for="city">City autocomplete (nicked from jquery ui demo):
@@ -102,10 +105,7 @@
             <pre class="prettyprint">
     &lt;input class=&quot;input-large&quot; id=&quot;city&quot; type=&quot;text&quot;/&gt;</pre>
             <pre class="prettyprint">
-    $("#postalCode").jeoPostalCodeLookup({
-        countryInput: $("#country"),
-        target: $("#postalPlace")
-    });</pre>
+    $("#city").jeoCityAutoComplete();</pre>
         </div>
     </body>
 
