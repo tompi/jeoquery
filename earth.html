@@ -77,7 +77,8 @@
                                     tree.jstree('create_node', node, 'last', data, function () {
                                         $('#' + gn.geonameId + ' a').popover({
                                             title: gn.name,
-                                            content: $(getPopoverContent(gn))
+                                            content: getPopoverContent(gn),
+                                            html: true
                                         });
                                     });
                                 }
