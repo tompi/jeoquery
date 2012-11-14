@@ -18,12 +18,12 @@
     <body class="container">
         <script type="text/javascript">
             function getPopoverContent(g) {
-                var c = '<table class="table table-striped"><thead>';
+                var c = '<p><table class="table table-striped"><thead>';
                 c += '<tr><th>Key</th><th>Value</th></tr></thead><tbody>';
                 for (var k in g) {
                     c += '<tr><td>' + k + '</td><td>' + g[k] + '</td></tr>';
                 }
-                return c + '</tbody></table>';
+                return c + '</tbody></table></p>';
             }
             $(function () {
                 // Set geonames user
@@ -78,7 +78,8 @@
                                         $('#' + gn.geonameId + ' a').popover({
                                             title: gn.name,
                                             content: getPopoverContent(gn),
-                                            html: true
+                                            html: true,
+                                            trigger: 'hover'
                                         });
                                     });
                                 }

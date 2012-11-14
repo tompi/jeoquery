@@ -12,6 +12,8 @@ a {
 a:hover {
 	color: #3aab42;
 }
+
+.container { padding-top: 30px; }
 	
 .hero-unit {
 	padding: 20px;
