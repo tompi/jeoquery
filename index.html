@@ -1,89 +1,74 @@
 <!DOCTYPE html>
 <html>
-<head>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-	<title>jeoQuery</title>
-
-	<link rel="stylesheet" href="http://twitter.github.com/bootstrap/assets/css/bootstrap.css"/>
-	<link rel="stylesheet" href="http://twitter.github.com/bootstrap/assets/css/bootstrap-responsive.css"/>
-	<link rel="stylesheet" href="jeoquery.css"/>
-	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
-	<script type="text/javascript" src="tracking.js"></script>
-</head>
-<body class="container">
-	<div class="row-fluid">
-		<div class="span12">
-			<div class="map">
-			<div class="hero-unit">
-				<div class="center">
-					<h1>jeoQuery</h1>
-					<p>
-						A small jQuery wrapper for the 
-						<a href="http://www.geonames.org">Geonames services</a>.
-					</p>
-					<p>
-						<small>
-							by <a href="mailto:thomas.haukland@gmail.com">Thomas Haukland</a>
-						</small>
-					</p>
-					<p>
-						<a href="jeoquery.js" class="btn btn-large btn-success">Download v0.1</a>
-						<a href="https://github.com/tompi/jeoquery" class="btn btn-large">View on Github</a>
-					</p>
-				</div>
-			</div>
-			</div>
-		</div>
-	</div>
-
-    <div class="section frontpage">
-		<div class="row-fluid">
-			<p>
-				jeoQuery is a small jquery wrapper for the JSON methods offered by
-				<a href="http://www.geonames.org">geonames</a>. It is written and
-				maintained by 
-				<a href="mailto:thomas.haukland@gmail.com">Thomas Haukland</a>
-				and available under either the MIT or the GPL 2 license, you choose...
-			</p>
-		</div>
-		<div class="row-fluid btn-container">
-			<div class="span8">
-			<p>
-				The "jeoquery" namespace contains one function per geonames 
-				service, allowing you to call them easily(ok it isn't that hard
-				without this wrapper, but this gives you autocomplete on params,
-				and this really nice demo page where
-				I've used jstree to visualize the resulting json.
-			</p>
-			</div>
-			<div class="span4">
-				<a href="methods.html">Methods demo</a>
-			</div>
-		</div>
-		<div class="row-fluid btn-container">
-		<div class="span8">
-			<p>
-				In addition, the jeoquery.js file gives you some ready ui-plugins.
-				Check out the ui-demo for a demonstration
-				of the country picker and the postal code lookup. More to come
-				soon...
-			</p>
-		</div>
-		<div class="span4 btn-container">
-			<a href="ui.html">UI demo</a>
-		</div>
-		</div>
-		<div class="row-fluid btn-container">
-		<div class="span8">
-			<p>
-				This demo lets you browse the geonames hierarchy, starting with earth.
-			</p>
-		</div>
-		<div class="span4 btn-container">
-			<a href="earth.html">Geonames as a tree</a>
-		</div>
-		</div>
-		</div>
-</body>
-
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <title>jeoQuery</title>
+        <link rel="stylesheet" href="http://twitter.github.com/bootstrap/assets/css/bootstrap.css"
+        />
+        <link rel="stylesheet" href="http://twitter.github.com/bootstrap/assets/css/bootstrap-responsive.css"
+        />
+        <link rel="stylesheet" href="jeoquery.css" />
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+        <script type="text/javascript" src="tracking.js"></script>
+    </head>
+    <body class="container">
+        <div class="row-fluid">
+            <div class="span12">
+                <div class="map">
+                    <div class="hero-unit">
+                        <div class="center">
+                            <h1>jeoQuery</h1>
+                            <p>A small jQuery wrapper for the
+                                <a href="http://www.geonames.org">Geonames services</a>.</p>
+                            <p>
+                                <small>by
+                                    <a href="mailto:thomas.haukland@gmail.com">Thomas Haukland</a>
+                                </small>
+                            </p>
+                            <p>
+                                <a href="jeoquery.js" class="btn btn-large btn-success">Download v0.1</a>
+                                <a href="https://github.com/tompi/jeoquery" class="btn btn-large">View on Github</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="section frontpage">
+            <div class="row-fluid">
+                <p>jeoQuery is a small jquery wrapper for the JSON methods offered by
+                    <a href="http://www.geonames.org">geonames</a>. It is written and maintained by
+                    <a href="mailto:thomas.haukland@gmail.com">Thomas Haukland</a>and available under either the MIT or the GPL 2 license, you choose...</p>
+            </div>
+            <div class="row-fluid btn-container">
+                <div class="span8">
+                    <p>The "jeoquery" namespace contains one function per geonames service, allowing
+                        you to call them easily(ok it isn't that hard without this wrapper, but
+                        this gives you autocomplete on params, and this really nice demo page where
+                        I've used jstree to visualize the resulting json.</p>
+                </div>
+                <div class="span4">
+                    <a href="methods.html">Methods demo</a>
+                </div>
+            </div>
+            <div class="row-fluid btn-container">
+                <div class="span8">
+                    <p>In addition, the jeoquery.js file gives you some ready ui-plugins. Check
+                        out the ui-demo for a demonstration of the country picker and the postal
+                        code lookup. More to come soon...</p>
+                </div>
+                <div class="span4 btn-container">
+                    <a href="ui.html">UI demo</a>
+                </div>
+            </div>
+            <div class="row-fluid btn-container">
+                <div class="span8">
+                    <p>This demo lets you browse the geonames hierarchy, starting with earth.</p>
+                </div>
+                <div class="span4 btn-container">
+                    <a href="earth.html">Geonames as a tree</a>
+                </div>
+            </div>
+        </div>
+    </body>
 </html>
