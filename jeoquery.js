@@ -37,12 +37,13 @@ var jeoquery = (function($) {
 				$.ajax({
 						url: my.geoNamesApi + method,
 						dataType: 'jsonp',
-						data: nonNullData,
-						success: callBack,
-						error: function(xhr, textStatus) {
+						data: nonNullData
+				})
+				.success(callBack)
+				.error(function(xhr, textStatus) {
 								alert('Ooops, geonames server returned: ' + textStatus);
 						}
-				});
+				);
 		}
 
 		function formatDate(date) {
