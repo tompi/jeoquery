@@ -39,8 +39,8 @@ var jeoquery = (function($) {
 						dataType: 'jsonp',
 						data: nonNullData
 				})
-				.success(callBack)
-				.error(function(xhr, textStatus) {
+				.done(callBack)
+				.fail(function(xhr, textStatus) {
 								alert('Ooops, geonames server returned: ' + textStatus);
 						}
 				);
