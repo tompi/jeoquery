@@ -22,7 +22,7 @@ You need to:
 
 * Download and include jeoquery.js
 * Get an account at geonames: http://www.geonames.org/login (it's free)
-* Set this account before using any methods: jeoquery.userName = 'geonames-user';
+* Set this account before using any methods: jeoquery.defaultData.userName = 'your-geonames-user';
 
 Check out the demo-pages for more info: http://tompi.github.com/jeoquery/
 
