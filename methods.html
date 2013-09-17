@@ -4,12 +4,12 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <title>jeoQuery methods</title>
-        <link rel="stylesheet" href="http://twitter.github.com/bootstrap/assets/css/bootstrap.css"
+        <link rel="stylesheet" href="bootstrap.min.css"
         />
-        <link rel="stylesheet" href="http://twitter.github.com/bootstrap/assets/css/bootstrap-responsive.css"
+        <link rel="stylesheet" href="bootstrap-responsive.min.css"
         />
         <link rel="stylesheet" href="jeoquery.css" />
-        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
         <script type="text/javascript" src="jstree/jquery.jstree.js"></script>
         <script type="text/javascript" src="jeoquery.js"></script>
     </head>
@@ -80,7 +80,7 @@
                 });
             }
             $(function () {
-                jeoquery.userName = 'tompi';
+                jeoquery.defaultData.userName = 'tompi';
             });
         </script>
         <div class="row">
@@ -89,7 +89,7 @@
                 <img src="http://www.geonames.org/img/globe.gif" style="float: right;"
                 alt="Geonames logo" />
                 <span style="font-size: 76px; float: right; padding-top: 20px;">+</span>
-                <img src="http://jquery.org/wp-content/uploads/2010/01/JQuery_logo_color_onwhite-300x74.png"
+                <img src="img/jquery.png"
                 style="float: right;" alt="jQuery logo" />
                 <h2>jeoQuery
                     <small>by Thomas Haukland</small>
@@ -101,109 +101,109 @@
             <p>Click a method, and explore the resulting json tree.</p>
         </div>
         <div class="row" id="directCalls">
-            <a class="btn" href="#" onclick="jeoquery.astergdem(dbg, '50.01', '10.2');return false;">
+          <a class="btn" href="#" onclick="jeoquery.getGeoNames('astergdem', { lat: '50.01', lng: '10.2' }, dbg);return false;">
 			 astergdem
 			</a>
-            <a class="btn" href="#" onclick="jeoquery.children(dbg, 3175395, '', dbg);return false;">
+      <a class="btn" href="#" onclick="jeoquery.getGeoNames('children', { geonameId: 3175395 }, dbg);return false;">
 			 children
 			</a>
-            <a class="btn" href="#" onclick="jeoquery.cities(dbg, '44.1','-9.9','-22.4','55.2','', dbg);return false;">
+      <a class="btn" href="#" onclick="jeoquery.getGeoNames('cities', { north: '44.1', south: '-9.9', east: '-22.4', west: '55.2' }, dbg);return false;">
 			 cities
 			</a>
-            <a class="btn" href="#" onclick="jeoquery.countryCode(dbg, '47.03','10.2','','','', dbg);return false;">
+      <a class="btn" href="#" onclick="jeoquery.getGeoNames('countryCode', { lat: '47.03', lng: '10.2' }, dbg);return false;">
 			 countryCode
 			</a>
-            <a class="btn" href="#" onclick="jeoquery.countryInfo(dbg, 'GB', 'NO');return false;">
+      <a class="btn" href="#" onclick="jeoquery.getGeoNames('countryInfo', { country: 'GB' }, dbg);return false;">
 			 countryInfo
 			</a>
-            <a class="btn" href="#" onclick="jeoquery.countrySubdivision(dbg, '47.03','10.2','1');return false;">
+      <a class="btn" href="#" onclick="jeoquery.getGeoNames('countrySubdivision', { lat: '47.03', lng: '10.2', level: '1' }, dbg);return false;">
 			 countrySubdivision
 			</a>
-            <a class="btn" href="#" onclick="jeoquery.earthquakes(dbg, '44.1','-9.9','-22.4','55.2');return false;">
+      <a class="btn" href="#" onclick="jeoquery.getGeoNames('earthquakes', { north: '44.1', south: '-9.9', east: '-22.4', west: '55.2' }, dbg);return false;">
 			 earthquakes
 			</a>
-            <a class="btn" href="#" onclick="jeoquery.findNearby(dbg, '47.03','10.2');return false;">
+      <a class="btn" href="#" onclick="jeoquery.getGeoNames('findNearby', { lat: '47.03', lng: '10.2' }, dbg);return false;">
 			 findNearby
 			</a>
-            <a class="btn" href="#" onclick="jeoquery.findNearbyPlaceName(dbg, '47.03','10.2');return false;">
+      <a class="btn" href="#" onclick="jeoquery.getGeoNames('findNearbyPlaceName', { lat: '47.03', lng: '10.2' }, dbg);return false;">
 			 findNearbyPlaceName
 			</a>
-            <a class="btn" href="#" onclick="jeoquery.findNearbyPostalCodes(dbg, '47.03','10.2');return false;">
+      <a class="btn" href="#" onclick="jeoquery.getGeoNames('findNearbyPostalCodes', { lat: '47.03', lng: '10.2' }, dbg);return false;">
 			 findNearbyPostalCodes
 			</a>
-            <a class="btn" href="#" onclick="jeoquery.findNearbyStreets(dbg, '37.451','-122.18');return false;">
+      <a class="btn" href="#" onclick="jeoquery.getGeoNames('findNearbyStreets', { lat: '37.451', lng: '-122.18' }, dbg);return false;">
 			 findNearbyStreets
 			</a>
-            <a class="btn" href="#" onclick="jeoquery.findNearbyStreetsOSM(dbg, '37.451','-122.18');return false;">
+      <a class="btn" href="#" onclick="jeoquery.getGeoNames('findNearbyStreetsOSM', { lat: '37.451', lng: '-122.18' }, dbg);return false;">
 			 findNearbyStreetsOSM
 			</a>
-            <a class="btn" href="#" onclick="jeoquery.findNearByWeather(dbg, '43', '-2');return false;">
+      <a class="btn" href="#" onclick="jeoquery.getGeoNames('findNearByWeather', { lat: '43', lng: '-2' }, dbg);return false;">
 			 findNearByWeather
 			</a>
-            <a class="btn" href="#" onclick="jeoquery.findNearbyWikipedia(dbg, '47', '9');return false;">
+      <a class="btn" href="#" onclick="jeoquery.getGeoNames('findNearbyWikipedia', { lat: '47', lng: '9' }, dbg);return false;">
 			 findNearbyWikipedia
 			</a>
-            <a class="btn" href="#" onclick="jeoquery.findNearestAddress(dbg, '37.451', '-122.18');return false;">
+      <a class="btn" href="#" onclick="jeoquery.getGeoNames('findNearestAddress', { lat: '37.451', lng: '-122.18' }, dbg);return false;">
 			 findNearestAddress
 			</a>
-            <a class="btn" href="#" onclick="jeoquery.findNearestIntersection(dbg, '37.451', '-122.18');return false;">
+      <a class="btn" href="#" onclick="jeoquery.getGeoNames('findNearestIntersection', { lat: '37.451', lng: '-122.18' }, dbg);return false;">
 			 findNearestIntersection
 			</a>
-            <a class="btn" href="#" onclick="jeoquery.findNearestIntersectionOSM(dbg, '37.451', '-122.18');return false;">
+      <a class="btn" href="#" onclick="jeoquery.getGeoNames('findNearestIntersectionOSM', { lat: '37.451', lng: '-122.18' }, dbg);return false;">
 			 findNearestIntersectionOSM
 			</a>
-            <a class="btn" href="#" onclick="jeoquery.findNearbyPOIsOSM(dbg, '37.451', '-122.18');return false;">
+      <a class="btn" href="#" onclick="jeoquery.getGeoNames('findNearbyPOIsOSM', { lat: '37.451', lng: '-122.18' }, dbg);return false;">
 			 findNearbyPOIsOSM
 			</a>
-            <a class="btn" href="#" onclick="jeoquery.get(dbg, 3175395);return false;">
+      <a class="btn" href="#" onclick="jeoquery.getGeoNames('get', { geonameId: 3175395 }, dbg);return false;">
 			 get
 			</a>
-            <a class="btn" href="#" onclick="jeoquery.gtopo30(dbg, '37.451', '-122.18');return false;">
+      <a class="btn" href="#" onclick="jeoquery.getGeoNames('gtopo30', { lat: '37.451', lng: '-122.18' }, dbg);return false;">
 			 gtopo30
 			</a>
-            <a class="btn" href="#" onclick="jeoquery.hierarchy(dbg, 3175395);return false;">
+      <a class="btn" href="#" onclick="jeoquery.getGeoNames('hierarchy', { geonameId: 3175395 }, dbg);return false;">
 			 hierarchy
 			</a>
-            <a class="btn" href="#" onclick="jeoquery.neighbourhood(dbg, '40.78343', '-73.96625');return false;">
+      <a class="btn" href="#" onclick="jeoquery.getGeoNames('neighbourhood', { lat: '40.78343', lng: '-73.96625' }, dbg);return false;">
 			 neighbourhood
 			</a>
-            <a class="btn" href="#" onclick="jeoquery.neighbours(dbg, 2658434);return false;">
+      <a class="btn" href="#" onclick="jeoquery.getGeoNames('neighbours', { geonameId: 2658434 }, dbg);return false;">
 			 neighbours
 			</a>
-            <a class="btn" href="#" onclick="jeoquery.ocean(dbg, '40.78343', '-43.96625');return false;">
+      <a class="btn" href="#" onclick="jeoquery.getGeoNames('ocean', { lat: '40.78343', lng: '-43.96625' }, dbg);return false;">
 			 ocean
 			</a>
-            <a class="btn" href="#" onclick="jeoquery.postalCodeCountryInfo(dbg);return false;">
+      <a class="btn" href="#" onclick="jeoquery.getGeoNames('postalCodeCountryInfo', {}, dbg);return false;">
 			 postalCodeCountryInfo
 			</a>
-            <a class="btn" href="#" onclick="jeoquery.postalCodeLookup(dbg, 4624, 'NO');return false;">
+      <a class="btn" href="#" onclick="jeoquery.getGeoNames('postalCodeLookup', { postalcode: 4624, country: 'NO' }, dbg);return false;">
 			 postalCodeLookup
 			</a>
-            <a class="btn" href="#" onclick="jeoquery.postalCodeSearch(dbg, 9011, '', '', '', '', 10, '', '', '', '');return false;">
+      <a class="btn" href="#" onclick="jeoquery.getGeoNames('postalCodeSearch', { postalcode: 9011 }, dbg);return false;">
 			 postalCodeSearch
 			</a>
-            <a class="btn" href="#" onclick="jeoquery.search(dbg, 'london');return false;">
+      <a class="btn" href="#" onclick="jeoquery.getGeoNames('search', { q: 'london' }, dbg);return false;">
 			 search
 			</a>
-            <a class="btn" href="#" onclick="jeoquery.siblings(dbg, 3017382);return false;">
+      <a class="btn" href="#" onclick="jeoquery.getGeoNames('siblings', { geonameId: 3017382 }, dbg);return false;">
 			 siblings
 			</a>
-            <a class="btn" href="#" onclick="jeoquery.srtm3(dbg, '50.01', '10.2');return false;">
+      <a class="btn" href="#" onclick="jeoquery.getGeoNames('srtm3', { lat: '50.01', lng: '10.2' }, dbg);return false;">
 			 srtm3
 			</a>
-            <a class="btn" href="#" onclick="jeoquery.timezone(dbg, '47.01', '10.2');return false;">
+      <a class="btn" href="#" onclick="jeoquery.getGeoNames('timezone', { lat: '47.01', lng: '10.2' }, dbg);return false;">
 			 timezone
 			</a>
-            <a class="btn" href="#" onclick="jeoquery.weather(dbg, '44.1','-9.9','-22.4','55.2');return false;">
+      <a class="btn" href="#" onclick="jeoquery.getGeoNames('weather', { north: '44.1', south: '-9.9', east: '-22.4', west: '55.2' }, dbg);return false;">
 			 weather
 			</a>
-            <a class="btn" href="#" onclick="jeoquery.weatherIcao(dbg, 'LSZH');return false;">
+      <a class="btn" href="#" onclick="jeoquery.getGeoNames('weatherIcao', { ICAO: 'LSZH' }, dbg);return false;">
 			 weatherIcao
 			</a>
-            <a class="btn" href="#" onclick="jeoquery.wikipediaBoundingBox(dbg, '44.1','-9.9','-22.4','55.2');return false;">
+      <a class="btn" href="#" onclick="jeoquery.getGeoNames('wikipediaBoundingBox', { north: '44.1', south: '-9.9', east: '-22.4', west: '55.2' }, dbg);return false;">
 			 wikipediaBoundingBox
 			</a>
-            <a class="btn" href="#" onclick="jeoquery.wikipediaSearch(dbg, 'ibsen');return false;">
+      <a class="btn" href="#" onclick="jeoquery.getGeoNames('wikipediaSearch', { q: 'ibsen' }, dbg);return false;">
 			 wikipediaSearch
 			</a>
         </div>
@@ -215,6 +215,6 @@
                 <div id="debug2" class="well"></div>
             </div>
         </div>
-    </body>
+    </body
 
 </html>

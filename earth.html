@@ -4,13 +4,13 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <title>jeoquery examples</title>
-        <link rel="stylesheet" href="http://twitter.github.com/bootstrap/assets/css/bootstrap.css"
+        <link rel="stylesheet" href="bootstrap.min.css"
         />
-        <link rel="stylesheet" href="http://twitter.github.com/bootstrap/assets/css/bootstrap-responsive.css"
+        <link rel="stylesheet" href="bootstrap-responsive.min.css"
         />
         <link rel="stylesheet" href="jeoquery.css" />
-        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
-        <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.2.1/bootstrap.min.js"></script>
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+        <script type="text/javascript" src="bootstrap.min.js"></script>
         <script type="text/javascript" src="jstree/jquery.jstree.js"></script>
         <script type="text/javascript" src="jeoquery.js"></script>
     </head>
@@ -27,7 +27,7 @@
             }
             $(function () {
                 // Set geonames user
-                jeoquery.userName = 'tompi';
+                jeoquery.defaultData.userName = 'tompi';
                 // Create tree with "Earth" node
                 var earth = {
                     data: 'Earth',
@@ -62,7 +62,7 @@
                         node.data('openedbefore', 'true');
                         var geoId = node.attr('id');
                         // Actual geonames lookup
-                        jeoquery.children(function (obj) {
+                        jeoquery.getGeoNames('children', { geonameId: geoId }, function (obj) {
                             if (obj && obj.geonames) {
                                 // Loop over results(children) and add them as nodes
                                 for (var i = 0; i < obj.geonames.length; i++) {
@@ -84,7 +84,7 @@
                                     });
                                 }
                             }
-                        }, geoId);
+                        });
                     }
                 });
             });
@@ -95,7 +95,7 @@
                 <img src="http://www.geonames.org/img/globe.gif" style="float: right;"
                 alt="Geonames logo" />
                 <span style="font-size: 76px; float: right; padding-top: 20px;">+</span>
-                <img src="http://jquery.org/wp-content/uploads/2010/01/JQuery_logo_color_onwhite-300x74.png"
+                <img src="img/jquery.png"
                 style="float: right;" alt="jQuery logo" />
                 <h2>jeoQuery
                     <small>by Thomas Haukland</small>

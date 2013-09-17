@@ -4,44 +4,19 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <title>jeoQuery UI</title>
-        <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/css/bootstrap-combined.min.css" rel="stylesheet">
-        <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/themes/redmond/jquery-ui.css"/>
+        <link href="bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/themes/redmond/jquery-ui.css"/>
         <link rel="stylesheet" href="jeoquery.css" />
-        <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
-        <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/jquery-ui.min.js"></script>
-        <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/prettify/188.0.0/prettify.js"></script>
-        <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/js/bootstrap.min.js"></script>
-        
-        <script type="text/javascript" src="jeoquery.js"></script>
-        <script type="text/javascript" src="tracking.js"></script>
     </head>
     
     <body class="container">
-        <script type="text/javascript">
-            $(function () {
-                jeoquery.userName = 'tompi';
-                
-                $("#country").jeoCountrySelect({
-                    callback: function () {
-                        $("#country").removeAttr('disabled');
-                    }
-                });
-                $("#postalCode").jeoPostalCodeLookup({
-                    countryInput: $("#country"),
-                    target: $("#postalPlace")
-                });
-                
-                $("#city").jeoCityAutoComplete();
-                prettyPrint();
-            });
-        </script>
         <div class="row">
             <div class="well">
                 <span style="font-size: 40px; float: right; padding-top: 20px; color: #363;">GeoNames</span>
                 <img src="http://www.geonames.org/img/globe.gif" style="float: right;"
                 alt="Geonames logo" />
                 <span style="font-size: 76px; float: right; padding-top: 20px;">+</span>
-                <img src="http://jquery.org/wp-content/uploads/2010/01/JQuery_logo_color_onwhite-300x74.png"
+                <img src="img/jquery.png"
                 style="float: right;" alt="jQuery logo" />
                 <h2>jeoQuery
                     <small>by Thomas Haukland</small>
@@ -56,12 +31,10 @@
         <div class="row well forms-horizontal" id="countrySelect">
             <label for="country">Country:
                 <select id="country" disabled="disabled">
-                    <option value="">Choose a country</option>
                 </select>
             </label>
             <pre class="prettyprint">
     &lt;select id=&quot;country&quot; disabled=&quot;disabled&quot;&gt;
-       &lt;option value=&quot;&quot;&gt;Choose a country&lt;/option&gt;
     &lt;/select&gt;</pre>
             <pre class="prettyprint">
     $("#country").jeoCountrySelect({
@@ -104,6 +77,30 @@
             <pre class="prettyprint">
     $("#city").jeoCityAutoComplete();</pre>
         </div>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+        <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/jquery-ui.min.js"></script>
+        <script src="http://cdnjs.cloudflare.com/ajax/libs/prettify/188.0.0/prettify.js"></script>
+        <script src="bootstrap.min.js"></script>
+        <script src="jeoquery.js"></script>
+        <script src="tracking.js"></script>
+        <script>
+            $(function () {
+                jeoquery.defaultData.userName = 'tompi';
+                
+                $("#country").jeoCountrySelect({
+                    callback: function () {
+                        $("#country").removeAttr('disabled');
+                    }
+                });
+                $("#postalCode").jeoPostalCodeLookup({
+                    countryInput: $("#country"),
+                    target: $("#postalPlace")
+                });
+                
+                $("#city").jeoCityAutoComplete({callback: function(city) { if (console) console.log(city);}});
+                prettyPrint();
+            });
+        </script>
     </body>
 
 </html>
