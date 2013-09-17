@@ -1,5 +1,5 @@
 /* 
- * jeoQuery v0.3
+ * jeoQuery v0.4
  *
  * Copyright 2012, Thomas Haukland
  * Dual licensed under the MIT or GPL Version 2 licenses.
