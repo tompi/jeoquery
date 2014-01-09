@@ -1,0 +1,28 @@
+{
+  "name": "jeoquery",
+  "version": "0.4.0",
+  "description": "jquery wrapper for geonames web services",
+  "main": "jeoquery.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tompi/jeoquery"
+  },
+  "keywords": [
+    "geonames",
+    "jquery",
+    "jsonp"
+  ],
+  "author": "Thomas Haukland",
+  "license": "MIT",
+  "readmeFilename": "README.md",
+  "gitHead": "93c0a227990ee461a208374d0855d4fd94664dc9",
+  "devDependencies": {
+    "grunt": "~0.4.1",
+    "grunt-contrib-jshint": "~0.7.2",
+    "grunt-contrib-uglify": "~0.2.7",
+    "grunt-contrib-qunit": "~0.3.0"
+  }
+}
