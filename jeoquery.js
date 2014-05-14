@@ -153,18 +153,29 @@ var jeoquery = (function ($) {
       source: function (request, response) {
         jeoquery.getGeoNames('search', {
           featureClass: jeoquery.featureClass.PopulatedPlace,
-          style: "full",
+          style: ((options && options.style) ? options.style : "medium"),
           maxRows: 12,
           name_startsWith: request.term
         }, function (data) {
-          response($.map(data.geonames, function (item) {
-            var displayName = item.name + (item.adminName1 ? ", " + item.adminName1 : "") + ", " + item.countryName;
-            return {
-              label: displayName,
-              value: displayName,
-              details: item
-            };
-          }));
+          response(function() {
+            data.geonames = $.map(data.geonames, function (item) {
+                var displayName = item.name + (item.adminName1 ? ", " + item.adminName1 : "") + ", " + item.countryName;
+                if (options && options.displayNameFunc) {
+                  displayName = options.displayNameFunc(item);
+                  if (displayName === null)
+                    return null;
+                }
+                return {
+                  label: displayName,
+                  value: displayName,
+                  details: item
+                };
+            });
+            if (options && options.preProcessResults) {
+                options.preProcessResults(data.geonames);
+            }
+            return data.geonames;
+          }());
         });
       },
       minLength: 2,
