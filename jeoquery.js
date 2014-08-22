@@ -35,9 +35,6 @@ var jeoquery = (function ($) {
     if (!method || !methods[method]) {
       throw 'Invalid geonames method "' + method + '".';
     }
-    if (!data) {
-      throw 'No parameters specified.';
-    }
     $.ajax({
       url: my.geoNamesProtocol + '://' + my.geoNamesApiServer + '/' + method + 'JSON',
       dataType: 'jsonp',

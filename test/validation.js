@@ -3,7 +3,4 @@ test("validation", function() {
   throws(function() {
     jeoquery.getGeoNames('misspelledmethod');
   }, 'Should not accept invalid method');
-  throws(function() {
-    jeoquery.getGeoNames('search');
-  }, 'Should not accept method without parameters.');
 });
