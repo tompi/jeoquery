@@ -1,0 +1,23 @@
+{
+  "name": "jeoquery",
+  "main": "jeoquery.js",
+  "version": "0.5.0",
+  "homepage": "https://github.com/tompi/jeoquery",
+  "description": "jquery wrapper for easily calling geonames.org jsonp services, and a few ui-controls for poulating html selects and inputs with geonames data",
+  "keywords": [
+    "geonames",
+    "jquery",
+    "geography"
+  ],
+  "authors": [
+    "Thomas Haukland"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
