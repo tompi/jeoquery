@@ -4,14 +4,20 @@ module.exports = function(grunt) {
     jshint: {
       files: ['*.js', 'test/*.js']
     },
-    qunit: {
-      files: ['test/test.html']
+    jasmine: {
+      src: 'jeoquery.js',
+      options: {
+        vendor: [
+          'test/lib/jquery.js',
+          'test/lib/jasmine-jquery.js'
+        ],
+        specs: 'test/Specs.js'
+      }      
     }
-
   });
   grunt.loadNpmTasks('grunt-contrib-jshint');
-  grunt.loadNpmTasks('grunt-contrib-qunit');
-  grunt.registerTask('default', ['jshint', 'qunit']);
-  grunt.registerTask('test', ['qunit']);
+  grunt.loadNpmTasks('grunt-contrib-jasmine');
+  grunt.registerTask('default', ['jshint', 'jasmine']);
+  grunt.registerTask('test', ['jasmine']);
 };
 

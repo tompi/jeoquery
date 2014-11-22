@@ -1,8 +1,8 @@
 /* 
- * jeoQuery v0.5
+ * jeoQuery v0.5.1
  *
- * Copyright 2012, Thomas Haukland
- * Dual licensed under the MIT or GPL Version 2 licenses.
+ * Copyright 2012-2038, Thomas Haukland
+ * MIT license.
  *
  */
 
@@ -39,6 +39,8 @@ var jeoquery = (function ($) {
       url: my.geoNamesProtocol + '://' + my.geoNamesApiServer + '/' + method + 'JSON',
       dataType: 'jsonp',
       data: $.extend({}, my.defaultData, data),
+      // GeoNames expects "traditional" param serializing
+      traditional: true,
       success: function(data) {
         deferred.resolve(data);
         if (!!callback) callback(data);
